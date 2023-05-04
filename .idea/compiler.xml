@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mybatis-mbg" />
         <module name="mybatis-parameter" />
         <module name="mybatis-dynamicSql" />
+        <module name="mybatis-mbg" />
+        <module name="spring_helloword" />
       </profile>
     </annotationProcessing>
   </component>

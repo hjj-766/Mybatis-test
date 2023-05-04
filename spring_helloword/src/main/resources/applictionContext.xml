@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    <!--
+        bean:配置HelloWorld所对应的bean，即将HelloWorld的对象交给Spring的IOC容器管理
+	通过bean标签配置IOC容器所管理的bean
+	属性：
+		id：设置bean的唯一标识,不能重复
+		class：设置bean所对应类型的全类名
+    -->
+    <bean id="helloworld" class="com.spring.pojo.Helloworld"></bean>
+    <!--setter注入赋值成员变量-->
+    <bean id="student1" class="com.spring.pojo.Student"></bean>
+    <bean id="student2" class="com.spring.pojo.Student">
+        <property name="sid" value="12315"></property>
+        <property name="sname" value="张三"></property>
+        <property name="age" value="23"></property>
+        <property name="gender" value="男"></property>
+    </bean>
+    <!--有参构造注入赋值成员变量-->
+    <bean id="student3" class="com.spring.pojo.Student">
+        <constructor-arg value="12"></constructor-arg>
+        <constructor-arg value="李四"></constructor-arg>
+        <constructor-arg value="34"></constructor-arg>
+        <constructor-arg value="女" name="gender"></constructor-arg>
+    </bean>
+        <!--引用外部已声明的bean赋值类的类属性-->
+    <bean id="student4" class="com.spring.pojo.Student">
+        <property name="sid" value="1004"></property>
+        <property name="sname" value="赵六"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        <!-- ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 -->
+        <property name="clazz" ref="clazzOne"></property>
+    </bean>
+    <bean id="clazzOne" class="com.spring.pojo.Clazz">
+        <property name="clazzId" value="1111"></property>
+        <property name="clazzName" value="财源滚滚班"></property>
+    </bean>
+    <!--内部bean赋值类的类属性-->
+    <bean id="student4-1" class="com.spring.pojo.Student">
+        <property name="sid" value="1546"></property>
+        <property name="sname" value="赵六"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        <property name="clazz">
+            <!-- 在一个bean中再声明一个bean就是内部bean -->
+            <!-- 内部bean只能用于给属性赋值，不能在外部通过IOC容器获取，因此可以省略id属性 -->
+            <bean id="clazzInner" class="com.spring.pojo.Clazz">
+                <property name="clazzId" value="2222"></property>
+                <property name="clazzName" value="远大前程班"></property>
+            </bean>
+        </property>
+    </bean>
+    <!--级联属性赋值-->
+<!--    <bean id="student4-2" class="com.spring.pojo.Student">
+        <property name="sid" value="1004"></property>
+        <property name="sname" value="赵六"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        &lt;!&ndash; 一定先引用某个bean为属性赋值，才可以使用级联方式更新属性 &ndash;&gt;
+        <property name="clazz" ref="clazzOne"></property>
+        <property name="clazz.clazzId" value="3333"></property>
+        <property name="clazz.clazzName" value="最强王者班"></property>
+    </bean>-->
+    <!--为数组类型属性赋值-->
+    <bean id="student4-3" class="com.spring.pojo.Student">
+        <property name="sid" value="9999"></property>
+        <property name="sname" value="4-3"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        <!-- ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 -->
+        <property name="clazz" ref="clazzOne"></property>
+        <property name="hobbies">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+    </bean>
+        <!-- 为List集合类型属性赋值-->
+    <bean id="clazz2" class="com.spring.pojo.Clazz">
+        <property name="clazzId" value="4444"></property>
+        <property name="clazzName" value="Javaee0222"></property>
+        <property name="students">
+            <list>
+                <ref bean="student1"></ref>
+                <ref bean="student2"></ref>
+                <ref bean="student3"></ref>
+            </list>
+        </property>
+    </bean>
+    <!--为Map集合类型属性赋值-->
+    <bean id="teacher1" class="com.spring.pojo.Teacher">
+        <property name="teacherId" value="10010"></property>
+        <property name="teacherName" value="大宝"></property>
+    </bean>
+    <bean id="teacher2" class="com.spring.pojo.Teacher">
+        <property name="teacherId" value="10086"></property>
+        <property name="teacherName" value="二宝"></property>
+    </bean>
+    <bean id="student4-4" class="com.spring.pojo.Student">
+        <property name="sid" value="5645"></property>
+        <property name="sname" value="老师"></property>
+        <property name="age" value="26"></property>
+        <property name="gender" value="女"></property>
+        <!-- ref属性：引用IOC容器中某个bean的id，将所对应的bean为属性赋值 -->
+        <property name="clazz" ref="clazzOne"></property>
+        <property name="hobbies">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+        <property name="teacherMap">
+            <map>
+                <entry>
+                    <key>
+                        <value>teacher1</value>
+                    </key>
+                    <ref bean="teacher1"></ref>
+                </entry>
+                <entry>
+                    <key>
+                        <value>teacher2</value>
+                    </key>
+                    <ref bean="teacher2"></ref>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!--引用类型的bean-->
+    <util:list id = "studentList">
+        <ref bean="student1"></ref>
+        <ref bean="student2"></ref>
+        <ref bean="student3"></ref>
+    </util:list>
+    <bean id="clazz-list" class="com.spring.pojo.Clazz">
+        <property name="clazzId" value="4444"></property>
+        <property name="clazzName" value="Javaee0222"></property>
+        <property name="students" ref="studentList"></property>
+    </bean>
+        <!--p命名空间-->
+    <bean id="student5" class="com.spring.pojo.Student"
+    p:sid="5465" p:sname="小米" p:teacherMap="teancherMap">
+    </bean>
+
+</beans>
