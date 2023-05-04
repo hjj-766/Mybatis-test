@@ -33,4 +33,6 @@ public interface SelectMapper {
 
     @MapKey("id")
     Map<String, Object> getUserToMapByAll();
+
+
 }

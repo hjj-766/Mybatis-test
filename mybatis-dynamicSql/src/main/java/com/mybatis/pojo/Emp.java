@@ -8,8 +8,18 @@ public class Emp {
     private  Integer age;
 
     private  String gender;
+    /*员工所对应的部门*/
+    private  Dept dept;
 
     public Emp() {
+    }
+
+    public Emp(Integer empId, String empName, Integer age, String gender, Dept dept) {
+        this.empId = empId;
+        this.empName = empName;
+        this.age = age;
+        this.gender = gender;
+        this.dept = dept;
     }
 
     public Emp(Integer empId, String empName, Integer age, String gender) {
@@ -51,6 +61,14 @@ public class Emp {
         this.gender = gender;
     }
 
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
+
     @Override
     public String toString() {
         return "Emp{" +
@@ -58,6 +76,7 @@ public class Emp {
                 ", empName='" + empName + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
+                ", dept=" + dept +
                 '}';
     }
 }
