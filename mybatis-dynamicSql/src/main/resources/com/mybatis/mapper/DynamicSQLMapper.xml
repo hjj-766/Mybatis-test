@@ -73,6 +73,7 @@
         )
     </delete>
 
+    <!--多对一，级联方式查询-->
 <!--    <resultMap id="empDeptMap" type="Emp">
         <id column="emp_id" property="empId"></id>
         <result column="emp_name" property="empName"></result>
@@ -81,7 +82,7 @@
         <result column="dept_id" property="dept.deptId"></result>
         <result column="dept_name" property="dept.deptName"></result>
     </resultMap>
-    &lt;!&ndash; Emp getEmpAndDeptByEid(@Param("empId") Integer empId);&ndash;&gt;
+    &lt;!&ndash; Emp getEmpAndDeptByEid(@Param("EmpId") Integer empId);&ndash;&gt;
     <select id="getEmpAndDeptByEid" resultMap="empDeptMap">
         select emp.*,dept.*
         from t_emp emp left join t_dept dept
@@ -104,7 +105,7 @@
         select emp.*,dept.* from t_emp emp left join t_dept dept on emp.dept_id =dept.dept_id where emp.emp_id = #{EmpId}
     </select>
 
-
+    <!--一对多collection-->
     <resultMap id="deptEmpMap" type="Dept">
         <id property="deptId" column="dept_id"></id>
         <result property="deptName" column="dept_name"></result>
@@ -124,7 +125,7 @@
         select dept.*,emp.* from t_dept dept left join t_emp emp on dept.dept_id =emp.dept_id where dept.dept_id = #{deptId}
     </select>
 
-
+        <!--一对多，分步查询-->
     <resultMap id="deptEmpStep" type="Dept">
         <id property="deptId" column="dept_id"></id>
         <result property="deptName" column="dept_name"></result>

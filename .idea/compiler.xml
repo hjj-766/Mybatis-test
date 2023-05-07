@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mybatis-parameter" />
         <module name="mybatis-dynamicSql" />
+        <module name="spring-transaction" />
+        <module name="spring-aop" />
         <module name="mybatis-mbg" />
         <module name="spring_helloword" />
       </profile>
