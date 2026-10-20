@@ -10,6 +10,7 @@
         <module name="mybatis-dynamicSql" />
         <module name="spring-transaction" />
         <module name="spring-aop" />
+        <module name="SSM" />
         <module name="mybatis-mbg" />
         <module name="spring_helloword" />
       </profile>
